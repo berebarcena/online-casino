@@ -10,7 +10,7 @@ Js, Css, Ejs
 
 **Back-end:**
 
-Express + Node.js, Postgres + Squelize
+Express + Node.js, Postgres + Sequelize
 
 The project will try to mimic a real "slot machine", so users will "win" or "lose" credits.
 
@@ -31,3 +31,7 @@ When the user clicks on "play", an ajax request will update the credits (reducin
 if the user wins, a second ajax request will grant the user 50 more credits
 
 In order to render the images that will spin, a json with images will be loaded and a js will take care of the "spining animation"
+
+## Timeline
+
+**Login / sign up - 0.5 day**
