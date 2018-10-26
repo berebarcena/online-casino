@@ -10,6 +10,9 @@ const db = new Sequelize({
   storage: './session.postgres',
 });
 
+// Declare Models
+const User = userModel(db, Sequelize);
+
 module.exports = {
   db,
   User,
