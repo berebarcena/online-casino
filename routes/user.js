@@ -3,13 +3,12 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const { User } = require('../models');
 
-//create a new user from the signup form
+//find the user in our database
 const getUser = (req, res) => {
-  const userSessionData = req.session.user || {};
-  if (!userSessionData.id) {
+  const userSession = req.session.user || {};
+  if (!userSession.id) {
     res.redirect('/');
   }
-  const userSessionId = userSessionData.id;
   const id = req.params.id;
   const message = req.query.message;
   User.findAll({
@@ -22,7 +21,7 @@ const getUser = (req, res) => {
       res.render('404', { error: 'This user does not exist' });
     } else {
       res.render('user', {
-        userSession: userSessionData,
+        userSession,
         message,
       });
     }
