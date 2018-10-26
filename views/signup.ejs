@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<%- include('partials/head', { title: 'Signup' }) %>
+
+<body>
+  <h1>Signup </h1>
+  <form method="POST" action="/signup" autocomplete="off">
+    <div class="form-field">
+      <label for="username" >Username </label>
+      <input type="text" id="username" name="username"  required>
+    </div>
+    <div class="form-field">
+      <label for="birthday" >Your birthday </label>
+      <input type="text" id="birthday" name="birthday"  required>
+    </div>
+    <div class="form-field">
+     <label for="email" >Email </label>
+     <input type="text" id="email" name="email"  required>
+    </div>
+    <div class="form-field">
+     <label for="password" >Password</label>
+     <input type="password" id="password" name="password" required>
+    </div>
+    <button type="submit" >Login</button>
+  </form>
+</body>
+
+</html>
