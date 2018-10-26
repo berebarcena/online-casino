@@ -3,9 +3,9 @@ const userModel = require('./user.js');
 
 //db config
 const db = new Sequelize({
-  database: process.env.BLOGAPP,
-  username: process.env.POSTGRES_USER,
-  host: 'localhost',
+  database: process.env.DB_NAME,
+  username: process.env.DB_USER,
+  host: process.env.DB_HOST,
   dialect: 'postgres',
   storage: './session.postgres',
 });
