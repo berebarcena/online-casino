@@ -2,19 +2,37 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const router = express.Router();
 const { User } = require('../models');
+const moment = require('moment');
 
 const get = (req, res) => {
   const userSession = req.session.user || {};
-  res.render('signup', { userSession });
+  const message = req.query.message || '';
+  res.render('signup', { userSession, message });
 };
 
 const newUserPOST = (req, res) => {
   //all fields are required
-  if (!req.body.username || !req.body.email || !req.body.password) {
+  if (
+    !req.body.username ||
+    !req.body.email ||
+    !req.body.password ||
+    !req.body.birthday
+  ) {
     res.redirect(
       `/signup?message=${encodeURIComponent('All fields are required')}`
     );
   }
+  const now = moment();
+  const userBirthday = moment(req.body.birthday);
+
+  if (now.diff(userBirthday, 'years') < 18) {
+    res.redirect(
+      `/signup?message=${encodeURIComponent(
+        'Must be 18 years old or older to register, sorry :('
+      )}`
+    );
+  }
+
   //find a user with that username
   User.findOne({
     where: {
@@ -49,7 +67,7 @@ const newUserPOST = (req, res) => {
     })
     .then(user => {
       req.session.user = user;
-      res.redirect('/');
+      res.redirect('/user/${user.id}');
     })
     .catch(err => {
       console.log(err);

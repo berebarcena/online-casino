@@ -2,6 +2,8 @@
 <%- include('partials/head', { title: 'Signup' }) %>
 
 <body>
+
+  <%= message %>
   <h1>Signup </h1>
   <form method="POST" action="/signup" autocomplete="off">
     <div class="form-field">
@@ -10,7 +12,7 @@
     </div>
     <div class="form-field">
       <label for="birthday" >Your birthday </label>
-      <input type="text" id="birthday" name="birthday">
+      <input type="date" id="birthday" name="birthday" required>
     </div>
     <div class="form-field">
      <label for="email" >Email </label>
@@ -20,8 +22,9 @@
      <label for="password" >Password</label>
      <input type="password" id="password" name="password" required>
     </div>
-    <button type="submit" >Login</button>
+    <button type="submit" >Register</button>
   </form>
 </body>
+
 
 </html>

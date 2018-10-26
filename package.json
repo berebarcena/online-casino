@@ -24,6 +24,7 @@
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
+    "moment": "^2.22.2",
     "pg": "^7.5.0",
     "sequelize": "^4.41.0"
   }
