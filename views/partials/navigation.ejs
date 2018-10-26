@@ -3,9 +3,9 @@
     <% if (!userSession.id) {%>
       <li><a href='/signup'>Signup</a></li>
       <li><a href='/login'>Login</a></li>
-    <% } %>
+    <% } else { %>
     <li><a href='/user/<%=userSession.id%>'><%= userSession.username %></a></li>
     <li><a href='/logout'>Logout</a></li>
-
+    <%} %>
   </ul>
 </nav>
