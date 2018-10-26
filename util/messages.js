@@ -6,4 +6,5 @@ module.exports = {
   emailInUse: 'An account with that email is already registered',
   invalidPass: 'Invalid password',
   userNotExistent: 'User does not exist',
+  loggedOut: 'You are now logged out',
 };
