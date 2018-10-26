@@ -3,10 +3,11 @@ const bcrypt = require('bcryptjs');
 const router = express.Router();
 const { User } = require('../models');
 const moment = require('moment');
+const errors = require('../util/messages');
 
 const get = (req, res) => {
   const userSession = req.session.user || {};
-  const message = req.query.message || '';
+  const message = req.query.message ? errors[req.query.message] : '';
   res.render('signup', { userSession, message });
 };
 
@@ -18,19 +19,13 @@ const newUserPOST = (req, res) => {
     !req.body.password ||
     !req.body.birthday
   ) {
-    res.redirect(
-      `/signup?message=${encodeURIComponent('All fields are required')}`
-    );
+    res.redirect('/signup?message=requiredFields');
   }
   const now = moment();
   const userBirthday = moment(req.body.birthday);
 
   if (now.diff(userBirthday, 'years') < 18) {
-    res.redirect(
-      `/signup?message=${encodeURIComponent(
-        'Must be 18 years old or older to register, sorry :('
-      )}`
-    );
+    res.redirect('/signup?message=ageRestriction');
   }
 
   //find a user with that username
@@ -42,11 +37,7 @@ const newUserPOST = (req, res) => {
     .then(user => {
       //if mail is already taken, then send an error
       if (user) {
-        return res.redirect(
-          `/signup?message=${encodeURIComponent(
-            'An account with that email is already registered'
-          )}`
-        );
+        return res.redirect('/signup?message=emailInUse');
       }
     })
     .catch(err => {
