@@ -5,14 +5,14 @@
 body {
   max-width: 90vw;
   margin: 50px auto;
+  font-family: 'Muli', sans-serif;
 }
 
+ul,
 li {
   list-style: none;
-}
-
-nav ul {
-  display: flex;
+  margin: 0;
+  padding: 0;
 }
 
 form {
@@ -24,8 +24,27 @@ input {
   padding: 5px;
 }
 
+a {
+  text-decoration: none;
+  color: #a2a2a2;
+}
+
 .form-field {
   display: flex;
   flex-direction: column;
   margin: 10px 0;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+}
+
+.navigation .links {
+  display: flex;
+  justify-content: space-between;
+}
+
+.links li {
+  min-width: 80px;
 }
