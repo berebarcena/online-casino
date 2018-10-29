@@ -14,6 +14,7 @@ const logoutRoutes = require('./routes/logout.js');
 const signupRoutes = require('./routes/signup.js');
 const userRoutes = require('./routes/user.js');
 const creditsRoutes = require('./routes/credits.js');
+const playRoutes = require('./routes/play.js');
 
 //get the static files
 app.use(express.static('public'));
@@ -44,6 +45,7 @@ app.use('/logout', logoutRoutes);
 app.use('/signup', signupRoutes);
 app.use('/user', userRoutes);
 app.use('/credits', creditsRoutes);
+app.use('/play', playRoutes);
 
 db.sync()
   .then(() => {
