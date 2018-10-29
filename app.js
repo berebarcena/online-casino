@@ -15,6 +15,7 @@ const signupRoutes = require('./routes/signup.js');
 const userRoutes = require('./routes/user.js');
 const creditsRoutes = require('./routes/credits.js');
 const playRoutes = require('./routes/play.js');
+const apiRoutes = require('./routes/api.js');
 
 //get the static files
 app.use(express.static('public'));
@@ -24,6 +25,7 @@ app.set('view engine', 'ejs');
 
 //bodyparser
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.use(
   session({
@@ -46,6 +48,7 @@ app.use('/signup', signupRoutes);
 app.use('/user', userRoutes);
 app.use('/credits', creditsRoutes);
 app.use('/play', playRoutes);
+app.use('/api', apiRoutes);
 
 db.sync()
   .then(() => {
