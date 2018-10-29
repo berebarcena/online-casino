@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcryptjs');
 const { User } = require('../models');
 
 //find the user in our database
@@ -11,16 +10,17 @@ const getUser = (req, res) => {
   }
   const id = req.params.id;
   const message = req.query.message;
-  User.findAll({
+  User.findOne({
     where: {
       id: id,
     },
   }).then(user => {
-    if (!user.length) {
+    if (!user.id) {
       res.status(400);
       res.render('404', { error: 'This user does not exist' });
     } else {
       res.render('user', {
+        user,
         userSession,
         message,
       });
