@@ -48,3 +48,31 @@ a {
 .links li {
   min-width: 80px;
 }
+
+/*slot machine */
+
+#slotmachine {
+  width: 100%;
+  height: 150px;
+  margin: 100px 0;
+}
+
+.slots-container {
+  display: flex;
+  justify-content: center;
+}
+
+.slots-container .slot {
+  position: relative;
+  overflow: hidden;
+  width: 150px;
+  height: 150px;
+}
+
+.slots-container .slot>.slot-wrapper {
+  margin: 0 auto;
+}
+
+.slots-container .slot>.slot-wrapper img {
+  width: 100%;
+}

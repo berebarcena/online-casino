@@ -6,10 +6,16 @@
     <%- include('partials/navigation') %>
   <div class="wrapper">
     <h3>You have <%= user.credits %> credits</h3>
+    <div id="slotmachine"></div>
 
-   <a href="#">Play</a>
+   <a href="#" id="play">Play</a>
   </div>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
+<script src="/js/slot.js"></script>
+<script src="/js/main.js"></script>
+
 
 </html>
 
