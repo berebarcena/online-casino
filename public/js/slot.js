@@ -2,12 +2,21 @@
 const SPIN_DURATION = 2000;
 
 class SlotMachine {
-  constructor(userId, credits, numSlots = 3, skin) {
+  constructor(userId, numSlots = 3, skin) {
     this.userId = userId;
-    this.credits = credits;
+    this.creditsToCharge = 5;
+    this.creditsToPay = 20;
     this.numSlots = numSlots;
     this.spinResults = [];
     this.skin = skin;
+
+    if (numSlots === 4) {
+      this.creditsToCharge = 10;
+      this.creditsToPay = 50;
+    } else if (numSlots === 5) {
+      this.creditsToCharge = 20;
+      this.creditsToPay = 100;
+    }
 
     //my class is going to be initialized with this methods
     this._createSlots();
@@ -47,13 +56,19 @@ class SlotMachine {
     // ajax call to check if user has enough credits.
     fetch('/api/credits/charge', {
       method: 'POST',
-      body: JSON.stringify({ id: 1, credits: this.credits }),
+      body: JSON.stringify({
+        userId: this.userId,
+        credits: this.creditsToCharge,
+      }),
       headers: {
         'Content-Type': 'application/json',
       },
     })
-      .then(res => console.log(res.json()))
-      .then(response => console.log('Success:', JSON.stringify(response)))
+      .then(res => res.json())
+      .then(response => {
+        $('.current-credits').html(response.credits);
+        //console.log('Success:', JSON.stringify(response))
+      })
       .catch(error => console.log('Error:', error));
 
     // if yes, return true

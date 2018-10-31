@@ -1,5 +1,5 @@
 $(function() {
-  const marioMachine = new SlotMachine(1, 4, 3, 'mario');
+  const marioMachine = new SlotMachine(1, 5, 'mario');
 
   $('#play').on('click', function() {
     marioMachine.start();

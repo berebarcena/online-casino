@@ -5,7 +5,7 @@
 <body>
     <%- include('partials/navigation') %>
   <div class="wrapper">
-    <h3>You have <%= user.credits %> credits</h3>
+    <h3>You have <span class="current-credits"><%= user.credits %></span> credits</h3>
     <div id="slotmachine"></div>
 
    <a href="#" id="play">Play</a>
