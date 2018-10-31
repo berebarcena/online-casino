@@ -1,5 +1,6 @@
 //unique value across the implementations
 const SPIN_DURATION = 2000;
+const TIME_TO_STOP = 1000;
 
 class SlotMachine {
   constructor(userId, numSlots = 3, skin) {
@@ -73,8 +74,21 @@ class SlotMachine {
   }
 
   _checkIfUserWon() {
+    const allFinalValues = this.slots.map(slot => {
+      return slot.getFinalValue();
+    });
+    if (allFinalValues.every((val, i, arr) => val == arr[0])) {
+      this._notifyUserWon();
+    } else {
+      $('.messages').html('Boo you whore');
+    }
+
     // if user won this._notifyUserWon();
     // and this._payUserWhoWon()
+  }
+
+  _notifyUserWon() {
+    $('.messages').html('Wuuuuu you won!!');
   }
 
   _payUserWhoWon() {}
@@ -85,9 +99,7 @@ class SlotMachine {
     );
   }
 
-  _notifyUserWon() {}
-
-  //we call this method whenever the user clicks on "start"
+  //call this method whenever the user clicks on "start"
   start() {
     //first check if user has enough money to be able to play
     this._validateCredits()
@@ -95,12 +107,22 @@ class SlotMachine {
         if (res.error) {
           this._notifyNotEnoughCredits();
         } else {
+          $('.messages').html('');
           $('.current-credits').html(res.credits);
           $('.slots-container').html('');
+          let slotsThatFinished = 0;
+
           this.slots.forEach(s => {
             s.spin();
             setTimeout(() => {
               s.stop();
+              slotsThatFinished += 1;
+
+              if (slotsThatFinished === this.slots.length) {
+                setTimeout(() => {
+                  this._checkIfUserWon();
+                }, TIME_TO_STOP);
+              }
             }, SPIN_DURATION);
           });
         }
@@ -144,6 +166,10 @@ class Slot {
     //this.slotIcons now gets the randomized images, this way whenever the user first "starts playing", each slot
     //will show a different image
     this.slotIcons = this.getItems();
+
+    // Hack to ensure we win for testing
+    // this.slotIcons.push('mario');
+
     //create each slot with the images in slotIcons
     const singleSlot = `<div class="slot ${this.skin}">
     <div class="slot-wrapper slot-wrapper-${this.idx}">
@@ -160,7 +186,6 @@ class Slot {
   spin() {
     // repeat the getSlotMarkup, so on each spin the items are re - randomized and re-rendered
     this.getSlotMarkup();
-
     //specifics for the timeline to work:
     //each wrapper is identified with its index, otherwise the animation goes crazy if the same timeline is used in
     //several items
@@ -181,7 +206,7 @@ class Slot {
   //stop the spinning
   stop() {
     this.tl.kill();
-    TweenLite.to(`.slot-wrapper-${this.idx}`, 1, {
+    TweenLite.to(`.slot-wrapper-${this.idx}`, TIME_TO_STOP / 1000, {
       y: -this.distanceToScroll,
       ease: Linear.easeNone,
     });
@@ -189,7 +214,7 @@ class Slot {
   }
 
   getFinalValue() {
-    //we need this to see if the user won or not, in this case the final value will always be the last item in the array
+    //check if the user won or not, in this case the final value will always be the last item in the array
     return this.slotIcons[this.slotIcons.length - 1];
   }
 }
