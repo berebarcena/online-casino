@@ -79,19 +79,34 @@ class SlotMachine {
     });
     if (allFinalValues.every((val, i, arr) => val == arr[0])) {
       this._notifyUserWon();
+      this._payUserWhoWon();
     } else {
       $('.messages').html('Boo you whore');
     }
-
-    // if user won this._notifyUserWon();
-    // and this._payUserWhoWon()
   }
 
   _notifyUserWon() {
     $('.messages').html('Wuuuuu you won!!');
   }
 
-  _payUserWhoWon() {}
+  _payUserWhoWon() {
+    return fetch('/api/credits/pay', {
+      method: 'POST',
+      body: JSON.stringify({
+        userId: this.userId,
+        credits: this.creditsToPay,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(res => {
+        $('.current-credits').html(res.credits);
+      });
+  }
 
   _notifyNotEnoughCredits() {
     $('.messages').html(
@@ -167,7 +182,7 @@ class Slot {
     //will show a different image
     this.slotIcons = this.getItems();
 
-    // Hack to ensure we win for testing
+    // ---------Hack to ensure we win for testing------------//
     // this.slotIcons.push('mario');
 
     //create each slot with the images in slotIcons
