@@ -54,7 +54,7 @@ class SlotMachine {
 
   _validateCredits() {
     // ajax call to check if user has enough credits.
-    fetch('/api/credits/charge', {
+    return fetch('/api/credits/charge', {
       method: 'POST',
       body: JSON.stringify({
         userId: this.userId,
@@ -64,15 +64,12 @@ class SlotMachine {
         'Content-Type': 'application/json',
       },
     })
-      .then(res => res.json())
-      .then(response => {
-        $('.current-credits').html(response.credits);
-        //console.log('Success:', JSON.stringify(response))
+      .then(res => {
+        return res.json();
       })
-      .catch(error => console.log('Error:', error));
-
-    // if yes, return true
-    // else return false
+      .then(res => {
+        return res;
+      });
   }
 
   _checkIfUserWon() {
@@ -82,40 +79,33 @@ class SlotMachine {
 
   _payUserWhoWon() {}
 
-  _notifyNotEnoughCredits() {}
+  _notifyNotEnoughCredits() {
+    $('.messages').html(
+      'Not enough credits to play :( Buy more <a href="/credits/buy">here</a>'
+    );
+  }
 
   _notifyUserWon() {}
 
   //we call this method whenever the user clicks on "start"
   start() {
     //first check if user has enough money to be able to play
-    this._validateCredits();
-    //reset the container to ensure we dont generate more slots each time the user clicks start
-    $('.slots-container').html('');
-    this.slots.forEach(s => {
-      s.spin();
-      setTimeout(() => {
-        s.stop();
-      }, SPIN_DURATION);
-    });
-
-    // if (this._validateCredits()) {
-    //   let slotsThatHaveFinished = 0;
-    //   this.slots.forEach(slot => {
-    //     slot.spin();
-    //     setTimeout(() => {
-    //       slot.stop();
-    //       this.spinResults.push(slot.getFinalValue());
-    //       slotsThatHaveFinished++;
-
-    //       if (slotsThatHaveFinished === this.slots.length) {
-    //         this._checkIfUserWon();
-    //       }
-    //     }, this.SPIN_DURATION + i * 500);
-    //   });
-    // } else {
-    //   this._notifyNotEnoughCredits();
-    // }
+    this._validateCredits()
+      .then(res => {
+        if (res.error) {
+          this._notifyNotEnoughCredits();
+        } else {
+          $('.current-credits').html(res.credits);
+          $('.slots-container').html('');
+          this.slots.forEach(s => {
+            s.spin();
+            setTimeout(() => {
+              s.stop();
+            }, SPIN_DURATION);
+          });
+        }
+      })
+      .catch(err => console.log);
   }
 }
 
@@ -195,6 +185,7 @@ class Slot {
       y: -this.distanceToScroll,
       ease: Linear.easeNone,
     });
+    this.tl = null;
   }
 
   getFinalValue() {
