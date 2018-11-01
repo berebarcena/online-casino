@@ -173,6 +173,15 @@ class Slot {
   getItems(skin) {
     const skins = {
       mario: ['star', 'mario', 'flower', 'coin', 'redToad', 'greenToad'],
+      pokemon: [
+        'bulbasaur',
+        'charmander',
+        'jigglypuff',
+        'pikachu',
+        'pokeball',
+        'squirtle',
+      ],
+      pusheen: ['donut', 'sherlock', 'wave', 'ramen', 'exercise', 'ride'],
     };
     //shuffling the images
     return this._shuffle(skins[this.skin]);

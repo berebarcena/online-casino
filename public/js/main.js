@@ -1,6 +1,6 @@
 $(function() {
   let numSlots = 3;
-  let skin = 'mario';
+  let skin = 'pusheen';
   const userId = parseInt($('#userId').val());
 
   let slotMachine1 = new SlotMachine(userId, numSlots, skin);
