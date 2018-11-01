@@ -5,23 +5,26 @@ const TIME_TO_STOP = 1000;
 class SlotMachine {
   constructor(userId, numSlots = 3, skin) {
     this.userId = userId;
-    this.creditsToCharge = 5;
-    this.creditsToPay = 20;
-    this.numSlots = numSlots;
     this.spinResults = [];
     this.skin = skin;
+    this.numSlots = numSlots;
 
-    if (numSlots === 4) {
+    //my class is going to be initialized with this methods
+    this._setLevel();
+    this._createSlots();
+    this._render();
+  }
+
+  _setLevel() {
+    this.creditsToCharge = 5;
+    this.creditsToPay = 20;
+    if (this.numSlots === 4) {
       this.creditsToCharge = 10;
       this.creditsToPay = 50;
-    } else if (numSlots === 5) {
+    } else if (this.numSlots === 5) {
       this.creditsToCharge = 20;
       this.creditsToPay = 100;
     }
-
-    //my class is going to be initialized with this methods
-    this._createSlots();
-    this._render();
   }
 
   _createSlots() {
@@ -34,21 +37,20 @@ class SlotMachine {
     }
   }
 
-  // changeSkin(skin) {
-  //   this.skin = skin;
-  //   // _updateSlotMachine
-  // }
-
-  // _updateSlotMachine() {
-  //   // delete current slots;
-  //   // _createSlots()
-  // }
+  reload(skin, numSlots) {
+    this.skin = skin;
+    this.numSlots = numSlots;
+    this._createSlots();
+    this._render();
+  }
 
   //now that I have my slots, I can actually render them
   _render() {
-    //whatever is inside slotmachine is gonna be replaced by empty slots-container first
+    //whatever is inside slotmachine is gonna be erased first and then replaced by empty slots-container
     //to ensure that the images are always re-rendered (otherwise, the user will see the same images as result)
-    $('#slotmachine').html('<div class="slots-container">');
+    $('#slotmachine')
+      .html('')
+      .html('<div class="slots-container">');
     //then, for each of my slots, get the markup
     this.slots.forEach(slot => slot.getSlotMarkup());
   }
@@ -183,7 +185,7 @@ class Slot {
     this.slotIcons = this.getItems();
 
     // ---------Hack to ensure we win for testing------------//
-    // this.slotIcons.push('mario');
+    //this.slotIcons.push('mario');
 
     //create each slot with the images in slotIcons
     const singleSlot = `<div class="slot ${this.skin}">
