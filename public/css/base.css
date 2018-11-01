@@ -54,7 +54,7 @@ a {
 #slotmachine {
   width: 100%;
   margin: 100px 0;
-  height: 180px;
+  height: 220px;
 }
 
 .slots-container {
@@ -65,8 +65,8 @@ a {
 .slots-container .slot {
   position: relative;
   overflow: hidden;
-  width: 180px;
-  height: 180px;
+  width: 220px;
+  height: 220px;
 }
 
 .slots-container .slot>.slot-wrapper {
@@ -75,4 +75,32 @@ a {
 
 .slots-container .slot>.slot-wrapper img {
   width: 100%;
+}
+
+.modal {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  overflow: hidden;
+  transition: opacity 1s ease;
+}
+
+.modal-content-wrapper {
+  position: relative;
+  background-color: white;
+}
+
+.modal.open {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 1s ease;
 }

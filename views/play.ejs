@@ -11,22 +11,29 @@
     <div id="slotmachine"></div>
 
    <button id="play">Play</button>
-   <button id="changeSkin">Change slot</button>
-   <button id="difficulty">Bet</button>
-   <button id="test">Changelevel</button>
+   <button class="trigger-modal" data-target="skin">Change machine</button>
+   <button class="trigger-modal" data-target="bet">Change your Bet</button>
   </div>
   <div class="modal skin">
-    <h1>Select a new slot skin</h1>
-    <button value="mario">mario</button>
-    <button value="zelda">legend of zelda</button>
-    <button value="pokemon">pokemon</button>
+    <div class="modal-content-wrapper">
+        <h1>Select a new slot skin</h1>
+        <button class="settings" data-skin="mario">Super Mario</button>
+        <button  class="settings" data-skin="pusheen">Pusheen the cat</button>
+        <button  class="settings" data-skin="pokemon">Pokemon</button>
+    </div>
+    <button class="close">Close</button>
   </div>
+
   <div class="modal bet">
-      <h1>How much do you want to bet?</h1>
-    <button value=3>3 slots pay 20 credits</button>
-    <button value="4">4 slots pay 50 credits</button>
-    <button value="5">5 slots pay 100 credits</button>
+    <div class="modal-content-wrapper">
+        <h1>How much do you want to bet?</h1>
+        <button class="settings" data-level="3">3 slots pay 20 credits</button>
+        <button class="settings" data-level="4">4 slots pay 50 credits</button>
+        <button class="settings" data-level="5">5 slots pay 100 credits</button>
+    </div>
+    <button class="close">Close</button>
   </div>
+
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
