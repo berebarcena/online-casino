@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <%- include('partials/head', { title: 'Home' }) %>
 
-<body>
-    <%- include('partials/navigation') %>
-    <%= message %>
- <h1>Hello this is our home</h1>
+<body class="home">
+  <%= message %>
+  <div class="wrapper">
+    <h1>Win big at <br>Bere's Casino</h1>
+    <div class="actions">
+        <a href="/login" class="cta login">Login</a>
+        <a href="/signup" class="cta">Register</a>
+
+    </div>
+
+  </div>
 </body>
 
 </html>

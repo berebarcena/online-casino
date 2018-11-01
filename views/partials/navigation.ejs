@@ -1,12 +1,16 @@
 <nav class="navigation">
-  <a href="/">Bere's casino :)</a>
+  <% if (!userSession.id) {%>
+  <a href="/" class="logo"><img src="/images/casino-logo.svg"></a>
+  <% } else {%>
+  <a href="/user/<%=userSession.id%>" class="logo"><img src="/images/casino-logo.svg"></a>
+  <% } %>
   <ul class="links">
     <% if (!userSession.id) {%>
       <li><a href='/signup'>Signup</a></li>
       <li><a href='/login'>Login</a></li>
     <% } else { %>
-      <li><a href='/play'>Play</a></li>
       <li><a href='/user/<%=userSession.id%>'><%= userSession.username %></a></li>
+      <li><a href='/play'>Play</a></li>
       <li><a href='/logout'>Logout</a></li>
     <%} %>
   </ul>

@@ -3,9 +3,11 @@
 
 <body>
   <%- include('partials/navigation') %>
+  <div class="wrapper">
   <h1>Buy credits</h1>
 
   <form method="POST" action="/credits/add" autocomplete="off">
+
     <div class="form-field">
       <label for="credit-amount"> Select the amount of credits </label>
       <select name="creditAmount" required>
@@ -36,8 +38,9 @@
         <label for="csv">CSV</label>
         <input type="text" class="csv" id="csv">
     </div>
-    <button type="submit" >Buy </button>
+    <button type="submit" class="cta">Buy </button>
   </form>
+</div>
 </body>
 
 

@@ -2,8 +2,11 @@
 <%- include('partials/head', { title: 'Signup' }) %>
 
 <body>
-
+    <nav class="navigation">
+      <a href="/" class="logo"><img src="/images/casino-logo.svg"></a>
+    </nav>
   <%= message %>
+  <div class="wrapper">
   <h1>Signup </h1>
   <form method="POST" action="/signup" autocomplete="off">
     <div class="form-field">
@@ -22,9 +25,10 @@
      <label for="password" >Password</label>
      <input type="password" id="password" name="password" required>
     </div>
-    <button type="submit" >Register</button>
+    <button type="submit" class="cta">Register</button>
   </form>
   <p>Have an account already? <a href="/login">Login</a></p>
+</div>
 </body>
 
 

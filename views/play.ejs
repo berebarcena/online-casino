@@ -2,17 +2,19 @@
 
 <%- include('partials/head', { title: 'Play Slot Machine' }) %>
 
-<body>
+<body class="play">
     <%- include('partials/navigation') %>
   <div class="wrapper">
-    <span class="messages"></span>
     <input type="hidden" value="<%= userSession.id %>" id="userId">
     <h3>You have <span class="current-credits"><%= user.credits %></span> credits</h3>
-    <div id="slotmachine"></div>
+    <h1 class="messages"></h1>
 
-   <button id="play">Play</button>
-   <button class="trigger-modal" data-target="skin">Change machine</button>
-   <button class="trigger-modal" data-target="bet">Change your Bet</button>
+    <div id="slotmachine"></div>
+    <div class="controls">
+      <button class="trigger-modal cta" data-target="skin" >Change machine</button>
+      <button id="play" class="cta main">Play</button>
+      <button class="trigger-modal cta" data-target="bet">Change your Bet</button>
+    </div>
   </div>
   <div class="modal skin">
     <div class="modal-content-wrapper">
@@ -20,8 +22,9 @@
         <button class="settings" data-skin="mario">Super Mario</button>
         <button  class="settings" data-skin="pusheen">Pusheen the cat</button>
         <button  class="settings" data-skin="pokemon">Pokemon</button>
+        <button class="close">Close</button>
     </div>
-    <button class="close">Close</button>
+
   </div>
 
   <div class="modal bet">
@@ -30,6 +33,7 @@
         <button class="settings" data-level="3">3 slots pay 20 credits</button>
         <button class="settings" data-level="4">4 slots pay 50 credits</button>
         <button class="settings" data-level="5">5 slots pay 100 credits</button>
+        <button class="close">Close</button>
     </div>
     <button class="close">Close</button>
   </div>

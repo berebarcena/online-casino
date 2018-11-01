@@ -3,7 +3,7 @@
 }
 
 body {
-  max-width: 90vw;
+  max-width: 85vw;
   margin: 50px auto;
   font-family: 'Muli', sans-serif;
 }
@@ -16,7 +16,7 @@ li {
 }
 
 form {
-  max-width: 350px;
+  width: 300px;
 }
 
 input {
@@ -26,7 +26,13 @@ input {
 
 a {
   text-decoration: none;
-  color: #a2a2a2;
+  color: #1B66E6;
+}
+
+button {
+  background: none;
+  border: 0;
+  cursor: pointer;
 }
 
 .form-field {
@@ -38,35 +44,45 @@ a {
 .navigation {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+a.logo img {
+  width: 50px;
 }
 
 .navigation .links {
   display: flex;
-  justify-content: space-between;
+  width: 50%;
+  justify-content: space-evenly;
+  margin: 25px 0;
 }
 
-.links li {
-  min-width: 80px;
+.links li a {
+  text-transform: uppercase;
+  font-size: 13px;
 }
 
 /*slot machine */
 
 #slotmachine {
-  width: 100%;
+  width: 70%;
   margin: 100px 0;
-  height: 220px;
+  height: 150px;
 }
 
 .slots-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 
 .slots-container .slot {
   position: relative;
   overflow: hidden;
-  width: 220px;
-  height: 220px;
+  width: 150px;
+  height: 150px;
 }
 
 .slots-container .slot>.slot-wrapper {
@@ -81,7 +97,7 @@ a {
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.90);
   z-index: 9;
   display: flex;
   justify-content: center;
@@ -97,10 +113,97 @@ a {
 .modal-content-wrapper {
   position: relative;
   background-color: white;
+  padding: 50px;
+  border-radius: 15px;
+  text-align: center;
+}
+
+.modal-content-wrapper button {
+  color: #1B66E6;
+}
+
+button.close {
+  position: absolute;
+  color: black;
+  top: 10%;
+  right: 10%;
 }
 
 .modal.open {
   opacity: 1;
   pointer-events: auto;
   transition: opacity 1s ease;
+}
+
+.home {
+  background-image: url('/images/background-home.jpeg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  margin: 0;
+  max-width: 100%;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.home .wrapper {
+  height: 100vh;
+  width: 85%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-direction: column;
+  text-align: right;
+}
+
+.home .wrapper h1 {
+  font-size: 100px;
+  color: white;
+  text-shadow: 4px 4px 10px black;
+}
+
+.home .actions {
+  display: flex;
+}
+
+.cta {
+  background-color: #EE41F4;
+  color: white;
+  padding: 15px 5px;
+  min-width: 150px;
+  text-align: center;
+  border-radius: 5px;
+  margin: 10px 0;
+  display: block;
+}
+
+.main {
+  background-color: #f441a1;
+  font-weight: bold;
+}
+
+.login {
+  background-color: #1B66E6;
+  margin-right: 15px;
+}
+
+.controls {
+  display: flex;
+  width: 45%;
+  justify-content: space-evenly;
+}
+
+.play h1.messages {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+}
+
+.play h1.messages p {
+  margin-right: 10px;
 }
