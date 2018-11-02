@@ -33,4 +33,12 @@ $(function() {
   $('.close').on('click', function() {
     $('.modal').removeClass('open');
   });
+
+  $('#win').on('click', function() {
+    slotMachine1.forceWin();
+  });
+
+  window.forceWin = function() {
+    $('#win').show();
+  };
 });

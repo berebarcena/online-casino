@@ -127,7 +127,7 @@ class SlotMachine {
   }
 
   //call this method whenever the user clicks on "start"
-  start() {
+  start(win = false) {
     //first check if user has enough money to be able to play
     this._validateCredits()
       .then(res => {
@@ -140,7 +140,7 @@ class SlotMachine {
           let slotsThatFinished = 0;
 
           this.slots.forEach(s => {
-            s.spin();
+            s.spin(win);
             setTimeout(() => {
               s.stop();
               slotsThatFinished += 1;
@@ -155,6 +155,10 @@ class SlotMachine {
         }
       })
       .catch(err => console.log);
+  }
+
+  forceWin() {
+    this.start(true);
   }
 }
 
@@ -172,15 +176,16 @@ class Slot {
 
   //helper method to shuffle arrays
   _shuffle(arr) {
-    for (let i = arr.length - 1; i > 0; i--) {
+    const newArr = arr.slice(0);
+    for (let i = newArr.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
+      [newArr[i], newArr[j]] = [newArr[j], newArr[i]];
     }
-    return arr;
+    return newArr;
   }
 
   //here I'm storing all my possible skins that user can change
-  getItems(skin) {
+  getItems(forceWin = false) {
     const skins = {
       mario: ['star', 'mario', 'flower', 'coin', 'redToad', 'greenToad'],
       pokemon: [
@@ -194,14 +199,20 @@ class Slot {
       pusheen: ['donut', 'sherlock', 'wave', 'ramen', 'exercise', 'ride'],
     };
     //shuffling the images
-    return this._shuffle(skins[this.skin]);
+    const items = this._shuffle(skins[this.skin]);
+
+    if (forceWin) {
+      items.push(skins[this.skin][0]);
+    }
+
+    return items;
   }
 
   //render a single slot
-  getSlotMarkup() {
+  getSlotMarkup(forceWin = false) {
     //this.slotIcons now gets the randomized images, this way whenever the user first "starts playing", each slot
     //will show a different image
-    this.slotIcons = this.getItems();
+    this.slotIcons = this.getItems(forceWin);
 
     // ---------Hack to ensure we win for testing------------//
     //this.slotIcons.push('mario');
@@ -219,9 +230,9 @@ class Slot {
   }
 
   //each slot has its own "spin animation"
-  spin() {
+  spin(forceWin = false) {
     // repeat the getSlotMarkup, so on each spin the items are re - randomized and re-rendered
-    this.getSlotMarkup();
+    this.getSlotMarkup(forceWin);
     //specifics for the timeline to work:
     //each wrapper is identified with its index, otherwise the animation goes crazy if the same timeline is used in
     //several items
