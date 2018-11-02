@@ -2,12 +2,11 @@ const Sequelize = require('sequelize');
 const userModel = require('./user.js');
 
 //db config
-const db = new Sequelize({
-  database: process.env.DB_NAME,
-  username: process.env.DB_USER,
-  host: process.env.DB_HOST,
+const db = new Sequelize(process.env.DATABASE_URL, {
   dialect: 'postgres',
-  storage: './session.postgres',
+  dialectOptions: {
+    ssl: process.env.NODE_ENV === 'production' ? true : false,
+  },
 });
 
 // Declare Models

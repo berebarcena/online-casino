@@ -1,4 +1,6 @@
-require('dotenv').config();
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
 
 const bodyParser = require('body-parser');
 const express = require('express');
@@ -52,7 +54,7 @@ app.use('/api', apiRoutes);
 
 db.sync()
   .then(() => {
-    const server = app.listen(3000, () => {
+    const server = app.listen(process.env.PORT || 3000, () => {
       console.log(`App listening on port: ${server.address().port}`);
     });
   })
