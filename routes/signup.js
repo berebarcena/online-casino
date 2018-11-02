@@ -58,7 +58,7 @@ const newUserPOST = (req, res) => {
     })
     .then(user => {
       req.session.user = user;
-      res.redirect('/user/${user.id}');
+      res.redirect(`/user/${user.id}`);
     })
     .catch(err => {
       console.log(err);
