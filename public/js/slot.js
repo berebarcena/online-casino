@@ -191,7 +191,7 @@ class Slot {
   //here I'm storing all my possible skins that user can change
   getItems(forceWin = false) {
     const skins = {
-      mario: ['star', 'mario', 'flower', 'coin', 'redToad', 'greenToad'],
+      mario: ['star', 'mario', 'flower', 'coin', 'redtoad', 'greentoad'],
       pokemon: [
         'bulbasaur',
         'charmander',
