@@ -122,7 +122,7 @@ class SlotMachine {
 
   _notifyNotEnoughCredits() {
     $('.messages').html(
-      'Not enough credits to play :( Buy more <a href="/credits/buy">here</a>'
+      '<p>Not enough credits to play. Buy more</p> <a href="/credits/buy">here</a>'
     );
   }
 

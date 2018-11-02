@@ -148,6 +148,7 @@ button.close {
   flex-direction: column;
   align-items: center;
   width: 100%;
+  position: relative;
 }
 
 .home .wrapper {
@@ -182,7 +183,7 @@ button.close {
 }
 
 .main {
-  background-color: #f441a1;
+  background-color: #1B66E6;
   font-weight: bold;
 }
 
@@ -202,6 +203,7 @@ button.close {
   justify-content: center;
   align-items: center;
   position: absolute;
+  top: 30px;
 }
 
 .play h1.messages p {
