@@ -32,6 +32,4 @@ if the user wins, a second ajax request will grant the user 50 more credits
 
 In order to render the images that will spin, a json with images will be loaded and a js will take care of the "spining animation"
 
-## Timeline
 
-**Login / sign up - 0.5 day**
